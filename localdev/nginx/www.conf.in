@@ -1,0 +1,115 @@
+map $http_host $skin_name {
+    hostnames;
+    default aaz;
+    include az_skins.map;
+}
+map $http_host $domain_prefix {
+    hostnames;
+    default aaz;
+    include domain_prefix.map;
+}
+
+# Google DNS
+resolver 8.8.8.8;
+
+server {
+
+    listen 8801;
+    listen 8804;
+    listen 8805;
+    listen 8806;
+    listen 8807;
+    listen 8808;
+    listen 8809;
+    listen 8810;
+
+    ssi on;
+    ssi_value_length 1024;
+    ssi_types        text/xml text/css application/json application/javascript;
+
+    # compression
+    gzip on;
+    gzip_types text/plain text/xml text/css application/x-javascript text/javascript application/javascript;
+
+    location ~ '^/\+\+ckey\+\+ssi/__node__/' {
+        rewrite ^/\+\+ckey\+\+ssi/__node__/(.*) /$1;
+        proxy_set_header X-SKIN $skin_name;
+        proxy_pass http://${backend:node};
+        break;
+    }
+
+    location ~ '^/__node__/(@@VERSION|\d+\.\d+\.\d+)/__static__/' {
+        ssi off;
+        rewrite ^/__node__/.*/__static__/(.*) /$1;
+        proxy_set_header X-SKIN $skin_name;
+        proxy_pass http://${backend:node};
+        break;
+    }
+
+    location ~ '^/__rss2__/' {
+        ssi off;
+        rewrite ^/__rss2__/(.*) /$1;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-SKIN $skin_name;
+        proxy_pass http://${backend:node};
+        break;
+    }
+
+    location ~ '/.*rss2(full)?.xml$' {
+        if ($skin_name != 'az') {
+            rewrite /(.*) /__rss2__/$1;
+        }
+    }
+
+    location ~ '^/(dashboard|anmelden|registrieren)$' {
+        # pages which are rendered directly in node
+        ssi on;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-SKIN $skin_name;
+        proxy_pass http://${backend:node};
+        break;
+    }
+
+    location ~ '/__addefend__' {
+        echo '';
+    }
+
+    location '/__fetchurl__' {
+        proxy_intercept_errors on;
+        error_page 404 = /__fetcherror__/404?$args;
+        error_page 500 = /__fetcherror__/500?$args;
+        error_page 502 = /__fetcherror__/502?$args;
+        error_page 504 = /__fetcherror__/504?$args;
+        proxy_set_header Accept-Encoding "";
+        proxy_connect_timeout 1s;
+        proxy_read_timeout 1s;
+        proxy_pass $arg_url;
+        break;
+    }
+
+    location ~ '/__fetcherror__/(.*)' {
+        add_header Varnish-Control '60';
+        add_header Varnish-Grace '79200';  # 22 hours
+        echo '<!-- __fetchurl__ error $1 "$arg_url" -->';
+        break;
+    }
+
+    location / {
+        proxy_set_header Cookie "ssi_off=1";
+        proxy_pass http://${backend:upstream};
+    }
+}
+
+server {
+    # A proxy to connect the node server to the correct API.
+
+    listen 8811;
+
+    location / {
+        proxy_pass http://${backend:api};
+    }
+}
