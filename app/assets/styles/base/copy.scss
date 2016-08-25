@@ -1,0 +1,112 @@
+@import 'globals';
+
+/**
+ * This file contains all styles applied to children of *copy* sections. Copy
+ * sections are sections containing user-generated content such as CMS entries,
+ * READMEs and comments.
+ */
+
+/**
+ * Links in copy sections
+ * 1. Remove default underline to have a better one with a gradient
+ * 2. Fake the underline with a gradient to have control over position and size
+ */
+.copy {
+  margin-bottom: 20px;
+}
+
+.copy a {
+  color: $light-blue;
+  text-decoration: none; /* 1 */
+  background: linear-gradient(to bottom, currentcolor, currentcolor) no-repeat bottom; /* 2 */
+  background-size: 100% 1px;
+
+  &:active,
+  &:hover {
+    color: $blue;
+  }
+
+  &:visited {
+    color: $medium-grey;
+  }
+}
+
+.copy h1 {
+  @include type-h1;
+  margin-bottom: 40px;
+}
+
+.copy h2 {
+  @include type-copy;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.copy h3 {
+  @include type-h3;
+}
+
+.copy h4 {
+  @include type-h4;
+}
+
+.copy blockquote {
+  @include type-blockquote;
+}
+
+.copy p,
+.copy ul,
+.copy ol,
+.copy > div {
+  @include type-copy;
+}
+
+.copy p,
+.copy ul,
+.copy ol,
+.copy h2,
+.copy h3,
+.copy h4,
+.copy table,
+.copy > div,
+.copy strong + br {
+  margin-top: 20px;
+}
+
+.copy *:first-child {
+  margin-top: 0;
+}
+
+/**
+ * Catch common CMS content patterns
+ */
+.copy strong + br {
+  display: block;
+  content: '';
+}
+
+// scss-lint:disable ImportantRule
+
+/**
+ * Preventing underlines from TinyMCE
+ */
+.copy span {
+  text-decoration: none !important;
+}
+
+/**
+ * Preventing TinyMCE from indenting content
+ */
+.copy > p {
+  padding-left: 0 !important;
+}
+
+/**
+ * Preventing bold-italic in TinyMCE
+ */
+.copy strong > em,
+.copy em > strong {
+  font-style: normal !important;
+}
+
+// scss-lint:enable ImportantRule

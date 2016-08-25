@@ -1,0 +1,203 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+$environment: 'dev' !default;
+
+// -----------------------------------------------------------------------------
+// FONT STACKS
+// -----------------------------------------------------------------------------
+
+
+/// Default font stack for the copy text
+/// @type List
+/// @group typography
+$text-font-stack: 'Publico', 'Georgia', serif;
+
+
+/// Heading font stack only used on article headlines
+/// @type List
+/// @group typography
+$headline-font-stack: 'Publico Headline', 'Times New Roman', serif;
+
+
+/// Supporting font stack mostly used for UI elements
+/// @type List
+/// @group typography
+$supporting-font-stack: 'Colfax', 'Helvetica', 'Arial', sans-serif;
+
+
+/// Supporting font stack mostly used for UI elements
+/// @type List
+/// @group typography
+$code-font-stack: 'Consolas', 'Monaco', 'Courier New', monospace;
+
+
+
+// -----------------------------------------------------------------------------
+// COLORS
+// /!\ Caution! The *... from ... palette* on each color is the color name and
+//     the palette it belongs to in the styleguide. Do not change the format.
+// -----------------------------------------------------------------------------
+
+/// AZ blue from primary palette
+/// This colour is used in the logo and as main brand colour.
+/// @group colors
+/// @type Color
+$blue: #1b4d85;
+
+
+/// Light blue from primary palette
+/// This colour is used to indicate links and interactive elements.
+/// @group colors
+/// @type Color
+$light-blue: #428bdd;
+
+
+/// Black from primary palette
+/// This colour is used for all of the text content on the site, instead of black.
+/// @group colors
+/// @type Color
+$black: #0b0b0b;
+
+
+/// Orange from secondary palette
+/// This colour represents dialogue, opinion and community content.
+/// @group colors
+/// @type Color
+$orange: #ffb64e;
+
+
+/// Yellow from secondary palette
+/// This colour is used for subtle highlights & drawing attention to certain sections and should be used sparingly.
+/// @group colors
+/// @type Color
+$yellow: #feef75;
+
+
+/// Turquoise from secondary palette
+/// This colour is used to represent dossier pages.
+/// @group colors
+/// @type Color
+$turquoise: #2cc4a8;
+
+
+/// Red from secondary palette
+/// This colour indicates live events and breaking news.
+/// @group colors
+/// @type Color
+$red: #ff5858;
+
+
+/// Dark grey from grey palette
+/// This colour is for contextual tags, quotes, captions and other small details.
+/// @group colors
+/// @type Color
+$dark-grey: #666;
+
+
+/// Medium grey from grey palette
+/// This colour is for backgrounds that need to stand out.
+/// @group colors
+/// @type Color
+$medium-grey: #888;
+
+
+/// Light grey from grey palette
+/// This colour is used to infer subtle backgrounds on pieces of content.
+/// @group colors
+/// @type Color
+$light-grey: #ededed;
+
+
+/// Very light grey from grey palette
+/// This colour is used to infer subtle backgrounds on pieces of content.
+/// @group colors
+/// @type Color
+$very-light-grey: #f8f8f8;
+
+
+/// Letterbox background colour
+/// Behind image gallery / responsive letterbox images
+/// @group colors
+/// @type Color
+$letterbox-background: #333;
+
+
+/// Publireportage theme
+/// Used for the Publireportage theme (Teasers)
+/// @group colors
+/// @type Color
+$publi-theme: #666;
+
+// -----------------------------------------------------------------------------
+// BREAKPOINTS AND MEDIA-EXPRESSIONS
+// -----------------------------------------------------------------------------
+
+
+/// Application-wide breakpoints map
+/// @type Map
+/// @prop {String} key - Name of the breakpoint
+/// @prop {Map} value - Breakpoint value expressed in pixels
+$breakpoints: (
+  'mobile-portrait': 40em, // 640px
+  'float-enrichments': 46.25em, // 740px
+  'tablet-portrait': 56.25em, // 900px
+  'tablet-landscape': 68.125em, // 1090px
+  'desktop-laptop': 71.9em, // 1151px
+  'center-layout': 95.063em, // 1521px
+  'advertising-medium': 728px,
+  'advertising-iphone5-portrait': 320px,
+  'advertising-iphone6-portrait': 414px,
+  'advertising-skyscraper': 1400px,
+  'full-screen-space': 1700px,
+  'grid-break-1': 500px,
+  'grid-break-2': 46.25em
+);
+
+
+/// Application-wide static queries map
+/// @type Map
+/// @prop {String} key - Name of the query
+/// @prop {String | List} value - Query value
+///   - key is repeated as value if simple query (e.g. `print`)
+///   - list is used for *or* conditions (e.g. retina)
+$media-expressions: (
+  'print': 'print',
+  'retina': ('(-webkit-min-device-pixel-ratio: 2)',
+    '(min-resolution: 192dpi)')
+);
+
+
+// -----------------------------------------------------------------------------
+// GLOBAL VARIABLES
+// -----------------------------------------------------------------------------
+
+/// The gutters at the side of the page
+/// @type Length
+/// @group container
+$container-spacing: 18px;
+
+/// Container width expressed in ems
+/// @type Length
+/// @group container
+$container-width: 1080px;
+
+/// Sidebar width expressed in ems
+/// @type Length
+/// @group container
+$sidebar-width: 350px;
+
+/// Offset for the largest skyscraper ad
+/// @type Length
+/// @group container
+$skyscraper-offset: 330px;
+
+/// Generic spacing between components
+/// @type Length
+/// @group components
+$component-spacing: 1.5em;
+
+/// Default border radius in pixels
+/// @type Length
+$default-radius: 3px;
