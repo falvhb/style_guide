@@ -1,0 +1,498 @@
+======================
+Changes for az-nwch-js
+======================
+
+unreleased
+==========
+
+ - added localdev nginx location for
+   - dashboard
+   - anmelden
+   - registrieren
+
+2015/10/08 0.0.53
+=================
+
+ - Teaser: massive refactoring of logic and conditionals for labels and switchable variations, as well as abstracting teaser parts
+ - TeaserSwitchable: added for separating concerns of teasers which change in variation
+   DEPLOY: update ALL node views in CMS as slot:recommendations?component=teaser-switchable now used
+ - ResponsiveImage: refactored to use <picture> element / picturefill and srcSet for PageSpeed and clientside performance
+ - ResponsiveImage: mixin deprecated and functions abstracted
+   TODO: abstract further, re-activate tests and align with Web IT about Kaltura images
+ - Picture: added for above and future re-usability
+ - Styleguide: fixed all views / components
+ - Helpers: refactored into clearer folder structure
+ - Teaser: stopped Sass code duplication and improved rendering
+ - restored image gallery functionality to set a certain teaser image other
+   than the first one
+ - add probestatus endpoint
+ - added tests for expander
+
+2015/10/08 0.0.52
+=================
+
+ - fix legacy teaser and image handling
+ - change nav-item "Panorama" to "Leben/Wissen"
+
+2015/10/07 0.0.51
+=================
+
+ - fixed the domain settings
+
+2015/10/07 0.0.50
+=================
+
+ - fix API error handling
+
+2015/10/07 0.0.49
+=================
+
+ - fix rss2 error response for not existing ressorts
+
+2015/10/07 0.0.48
+=================
+
+ - added varnish cache middleware to all endpoints
+   Deploy:
+    add VARNISH_CACHE_TIME and VARNISH_GRACE_TIME environment variables
+ - middleware to set cache headers for varnish caching
+ - added legacy treasers
+ - removed “Zusammenfassung” text from DossierHeader
+
+2015/10/02 0.0.47
+=================
+
+ - fixed setup for deployment
+
+ - added /probe_status endpoint for haproxy
+
+2015/09/30 0.0.46
+=================
+
+- server is now reading an additional configuration file if
+  process.env.DEPLOYED is set. This is needed to be able to deploy multiple
+  versions at the same time.
+- added tests for video library components
+- trimmed title of video teaser
+- added displaying of source in video library
+
+2015/09/29 0.0.45
+=================
+
+- implementation of Video Library component in Style Guide
+- Teaser: add labelling and formats
+
+2015/09/17 0.0.44
+=================
+
+- Implement MegaTeaser component
+- Make skyscraper align right side and fix spacing on Dossier
+- Center all ads
+- Update ReadMes
+
+2015/09/16 0.0.43
+=================
+
+- skin name normalization due to additional skin names
+  The additional skin names are used to be able to run the backend for the old
+  and the new skins at the same time.
+- centralized skin name lookup
+- Abstract Section and SectionHeader components and re-use across the site
+- Fix horizontal scrolling
+  DEPLOY (STAGING): update all CMS node-layouts with DEV version
+- Re-designs subressort navigation
+- Makes secondary-nav its own component and cleans up data passed from nav slots
+
+2015/09/10 0.0.42
+=================
+
+- adds specs for slots and helpers
+- merges react optimization story
+- adds conditional ISO rendering
+- removes jQuery from Flickity
+- DossierHeader: fixes image size/ratio
+- Article: fix stoerer position and article alignment
+- Teaser: tweaks large variation on small screen sizes
+- Teaser: adds basic-listed variation and data-switching between viewports
+- Teaser: improves spacing on overview pages
+- Advertising: fix sticky behaviour of skyscraper
+- Advertising: adds in-article Rectangle ad
+
+2015/09/01 0.0.41
+=================
+
+- added a demo to show how mails can be sent
+- added a common mail module
+- organisation is now derived from the skin ID in FooterCopyright
+- button is namespaced under FooterSections rather than Footer, so it is correctly styled in styleguide
+- tidies up wrapper for RessortTeaser
+- use fitToBox in ResponsiveImageMixin instead of fill as a flag for scaling the image, as fill is already used
+- pull the CTA from RessortTeaser into its own component (CMS markup to be updated)
+- use existing Grid component for RecommendationsBottom (CMS markup to be updated)
+
+2015/09/01 0.0.40
+=================
+
+- added recaptcha2 middleware
+
+2015/09/01 0.0.39
+=================
+
+- Fix video player
+
+2015/09/01 0.0.38
+=================
+
+- Fix: fix Icons
+- RSS: fix wrong feedTitle.
+- localdev nginx: only render news domains RSS feeds on the Node layer.
+- getScript helper is now Promise-based. Instead of passing a callback it returns a Promise object
+
+2015/09/01 0.0.37
+=================
+
+ - added rss2 page endpoints
+
+2015/09/01 0.0.36
+=================
+
+- hotfix side ad so it’s not cut off
+- removes copyright symbol from article byline
+- adds heart and watch icons
+- cleans up general styleguide styles
+- updates many .data.json/.variations.json files
+- updates many READMEs
+- fixes console error for unknown global in Video
+- updates Download Stoerer enrichment
+
+2015/08/28 0.0.35
+=================
+
+- added bugmuncher script to the __body_bottom include
+  DEPLOY:
+   set BUG_MUNCHER=true in .env.deploy for staging
+- fixes HeaderNav behaviour on pages with advertising
+- implements a simpler IE9 fix for HeaderNav
+
+2015/08/28 0.0.34
+=================
+
+- better exception handling while rendering components
+- adds missing video microdata
+- adds microdata meta tags where visible content is not available
+- simplifies image microdata
+- updating regex for HTML snippet captions
+
+2015/08/25 0.0.33
+=================
+
+- Article: add jQuery to page and document
+- Video: use az.globals for Kaltura ID so videos work on all skins
+
+2015/08/25 0.0.32
+=================
+
+- fixed microdata markup for articles and article teasers
+- RessortTeaser: moving location of container in styleguide markup
+
+2015/08/25 0.0.31
+=================
+
+- changed landing page grid from 4-wide to 3-wide
+- ResponsiveImage: improved image handling via config/images.jsx
+- HeaderNav: finalised including login and search
+- remove empty grid-cells on the client for cleaner layouts
+
+2015/08/25 0.0.30
+=================
+
+- provide kaltura ids in "az.globals" for client use
+
+2015/08/24 0.0.29
+=================
+
+- changed the way how environment settings are loaded
+- fixed 'replace' exception
+- bug fixes and improves sticky skyscraper
+- improve layout and config of advertising
+- hide comments if disabled in the CMS
+- clean up title and alt attr logic on images
+- parse line breaks in emails from social share buttons
+- fix navigation and teaser flickering in Safari
+- fix API tests by extending Request mock object
+- implement sticky skyscraper advertising
+- Icon: enable parent components to style SVG
+- RessortTeaser: CTA now uses an SVG icon instead of incorrect ASCII arrow
+- make Youtube and Vimeo HTML snippets responsive
+- style HTML snippet captions
+
+2015/08/18 0.0.28
+=================
+
+- fix API tests by extending Request mock object
+- add AZ Medien logo to footer
+- make Ads work without iFrame
+- RessortTeaser: new component for displaying sections on the homepage
+- RessortTeaserBuilder: higher-order component for building list of items for RessortTeaser
+
+2015/08/17 0.0.27
+=================
+
+- Fixes unproportional scaling of images in image gallery
+
+2015/08/14 0.0.26
+=================
+
+ - detect "publireportage" on main- and sub-ressort
+
+2015/08/14 0.0.25
+=================
+
+ - Improved image handling on teasers and dossier
+ - Improved advertising spacing and alignment
+ - Article body now accepts h2s!
+ - CuratedRecommendations / ImageGallery: make these play nicely together and improve on-load rendering
+ - ResponsiveImage: adds fitToBox for removing edges around images
+ - Footer: Make it work and use JSONified links in footer for now, with static API data
+   TODO: API call on the server passing sections as props
+ - HeaderNav: stop touch scrolling when nav is open
+
+2015/08/13 0.0.24
+=================
+
+ - request subressorts of subressorts to be able to show the ressort header
+   navigation with the ressort title
+
+2015/08/13 0.0.23
+=================
+
+ - HeaderNav: redesign scroll behaviour and fix in IE11/10
+ - added a wrapper for async rendering to have a better exception experience
+
+2015/08/13 0.0.22
+=================
+
+ - CuratedRecommendations: slice curated teasers to max 3
+
+ - fixed API URL for the subressort request
+
+2015/08/13 0.0.21
+=================
+
+  - EnrichmentSnippet - don't re-render client-side to not interfere with inline <script>s
+
+2015/08/12 0.0.20
+=================
+
+  - DossierHeader: lowercase before uniq to ensure duplicate tags are caught
+  - ImageGallery: revert to basic image enrichment if gallery only contains one image
+  - EnrichmentSnippet - these don't need captions unless there's a source
+  - Caption - improve styling and display logic
+  - Improves and (hopefully... :-/) fixes parsing of body content
+  - fix general layout bugs
+  - fix footer alignment (Impediment #335)
+  - fix whitespace issue (Impediment #334)
+  - move social icons to the bottom of article
+  - center-align ad-slots
+  - smooth layout transitions between tablet and desktop
+  - align next-reads and rec. videos with article content
+
+2015/08/12 0.0.19
+=================
+
+ - provide related keywords in dossier header
+
+ - limit number of keywords shown in dossier header to 6
+
+ - gzip js files in localdev
+
+2015/08/12 0.0.18
+=================
+
+ - footer injection hotfix
+
+2015/08/11 0.0.17
+=================
+
+  - fix image not using cropped version due to missing parentheses (ffs)
+  - fix unclickable body on mobile devices
+  - rename all mediaqueries so that they make sense
+  - use ems for mediaqueries to make the layout zoomable
+  - adjust advertising position and behavior on article page
+  - adjust container behaviour globally
+
+2015/08/11 0.0.16
+=================
+
+  - improved icon, linking and behavior of nav
+  - fixed dossier page
+
+
+2015/08/10 0.0.15
+=================
+
+  - adds header and navigation for all sites using header-nav component
+  - creates primary-nav and header-logo components
+  - adds /config folder for easy updating of site-specifics via json
+  - adds dynamic logo to footer
+
+2015/08/10 0.0.14
+=================
+
+ - simplyfied the build process for localdev, see localdev/README.rst section
+   "Building The Proxy"
+
+  - localdev uses aaz as the default skin name to be able to use it with ngrok
+  - added dossier header to dossier page and plugged-in API
+  - removes user feedback widget for MVP
+
+2015/08/07 0.0.13
+=================
+
+  - added static URL versioning
+  - moved `cookie-session` to `modules` and applid some changes:
+    if a cookie value starts and ends with double quotes, the quotes are
+    stripped; this is necessary because python adds these double quotes
+    automatically under certain circumstances
+  - added dependencies: keygrip, debug, no-headers
+    DEPLOY: npm install
+  - use patched `cookie-session` package (see above)
+  - updated SESSION_SECRET for local development in `.env`
+  - updated app.listen to show the url the server is listening
+  - updated api tests
+
+2015/08/06 0.0.12
+=================
+
+ - render ressort-header from subressort configuration
+
+2015/08/04 0.0.11
+=================
+
+  - added `qs` as dependency to convert querystring <--> object
+  - added `express` as dependency (replaces loopback)
+    DEPLOY: npm install
+  - added asynchronous api connector
+  - uses async api connector for users, articles, topics, dossiers
+  - removed loopback & loopback-* modules
+  - removed `winston` as logger
+
+2015/08/04 0.0.10
+=================
+
+  - adds grid framework for use on the home, dossier and ressort pages
+  - begins ressort, subressort and dossier pages in styleguide
+
+2015/08/04 0.0.9
+================
+
+  - added `babel-core` as dependency to be able to shrinkwrap
+  - added `cookie-session` as dependency
+    DEPLOY: npm install
+  - added AZUser model
+  - added middleware `loadUser` to load user data based on session
+  - added `SESSION_COOKIE` and `SESSION_SECRET` to .env
+    DEPLOY: set these variables
+  - disabled global error handler to be able to see errors
+  - added dossier header to dossier page and plugged-in API
+  - removes user feedback widget for MVP
+
+2015/08/03 0.0.8
+================
+
+- Advertising integration (still needs verification/testing from ADTECH)
+
+2015/07/31 0.0.7
+================
+
+ - fixed curated recomendations
+
+ - fixed footer
+
+2015/07/31 0.0.6
+================
+
+  - added user feedback widget
+  - made dossier routing generic
+
+2015/07/30 0.0.5
+================
+
+  - add axios as a Promise library and use for topic page and styleguide
+  - fixed body parsing error with document stoerers
+  - improved image rendering (remove 1px 'jump')
+  - always show aspect ratio box so again, no jump
+  - fixed title on topic page - just shows keyword as it is
+
+
+2015/07/29 0.0.4
+================
+
+  - fixed routing problems
+
+2015/07/29 0.0.3
+================
+
+  - moved Nunjucks include folder from `/app/node_modules/components/includes` to `/app/includes`
+
+  - added route for dossier-header
+
+2015/07/28 0.0.2
+================
+
+  - improved parsing of enrichments. fixes
+    https://github.com/lovelysystems/az-nwch-js/issues/93#issuecomment-124952925
+  - adds ajax results to topic page
+  - improves use of ENV variables
+  - improved fetching of teaser images (those with videos / gallery main assets)
+  - adds topic page and basic pagination, using static links only (no-js)
+
+  - uses .env for pagination count
+    DEPLOY: add PAGINATED=12 to env file
+
+2015/07/27 0.0.1
+================
+
+ - uses .env vars for Kaltura params
+   DEPLOY: need to add Kaltura and STATIC_ASSETS vars to env files
+
+ - using two .env files - .env and .env.dev
+
+ - added __fetchurl__ endpoint to nginx to be able to fetch the azmedien
+   footer in local dev environment
+
+ - improved image handling over all with 16x9 main asset cropping and letterbox option plus loading failed fallback
+ - improved image gallery styling, interactions and image sizing / mobile sizing
+ - fixed video enrichments in the production environment
+ - improved data handling for byline, sources, title/descrption and image_url
+ - implemented HTML snippet enrichment with parsing
+ - finalised sidebar recommendations panel and mobile-behaviour / client-side JS
+ - fixed ordering of recommended article teaser slots on article page
+ - improved article rollovers, interactions and other layout / styling tweaks
+ - improved teaser layouts and fallbacks
+ - added social sharing button popups instead of new window on click
+ - added download file type and filesize to document enrichment
+ - integrated related videos into page and re-used slider / code from curated recommendations
+ - added slider resizing behaviour
+ - created extra helpers for improved data mapping
+ - added meta data to curated recommendations
+ - stopped social buttons being picked up by adblockers
+ - improved responsive behaviour overall and much DRYer Scss
+ - allowed gallery and video assets as the main asset
+ - implemented related videos panel
+   DEPLOY: add node view to staging in CMS
+ - introduced tests for routing
+ - improved routing for components
+ - test runners now actually return an error code greate than 0 if a test failed
+ - introduced error handling: returns status code 200 if not explicitly set
+   otherwise.
+ - introduced 'catch all' route if no other router is found.
+ - introduced logger 'winston'
+ - disabled 'x-powered-by'
+ - removed boot/explorer.js
+
+
+2015/07/14 0.0.0
+================
+
+ - initial release
